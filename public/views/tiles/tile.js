@@ -8,12 +8,12 @@
 
         //here's your damn chifshitz.
         var tiles = [
-          {'x':0,'y':0,'pixleX'=0,'pixleY'=0,'corners':["rock","rock","grass","grass","water","grass",],'placed':True},
-          {'x':1,'y':0,'pixleX'=0,'pixleY'=0,'corners':["grass","grass","grass","grass","grass","rock"],'placed':True},
-          {'x':1,'y':-1,'pixleX'=0,'pixleY'=0,'corners':["grass","grass","grass","grass","grass","grass"],'placed':True},
-          {'x':0,'y':1,'pixleX'=0,'pixleY'=0,'corners':["empty","empty","grass","rock","rock","empty"],'placed':False},
-          {'x':2,'y':-1,'pixleX'=0,'pixleY'=0,'corners':["grass","empty","empty","empty","grass","grass"],'placed':False},
-          {'x':0,'y':-1,'pixleX'=0,'pixleY'=0,'corners':["water","grass","grass","empty","empty","empty"],'placed':False}
+          {'x':0,'y':0,'corners':["rock","rock","grass","grass","water","grass",],'placed':True},
+          {'x':1,'y':0,'corners':["grass","grass","grass","grass","grass","rock"],'placed':True},
+          {'x':1,'y':-1,'corners':["grass","grass","grass","grass","grass","grass"],'placed':True},
+          {'x':0,'y':1,'corners':["empty","empty","grass","rock","rock","empty"],'placed':False},
+          {'x':2,'y':-1,'corners':["grass","empty","empty","empty","grass","grass"],'placed':False},
+          {'x':0,'y':-1,'corners':["water","grass","grass","empty","empty","empty"],'placed':False}
         ];
 
         var yS;
@@ -122,12 +122,17 @@
           tiles.push({'x':x,'y':y,'placed':False,'corners':["empty","empty","empty","empty","empty","empty"]});
           return getTile(x,y);
         }
-
+        rotateTile(tile,rotation){
+          var mytile = tile
+          for(var i;i<6;i++){
+            mytile.corners[i]=tile.corners[(i+rotation)%6];
+          }
+          return mytile;
+        }
         //getTile(x,y),getNeighbot(getTile(x,y),n)-->boolean
         placeTile=function(myTile,toTile,rotation){
-          if(self.fits(myTile.corners,toTile.corners)&&(!(toTile.placed))){
-            self.update[myTile,toTile];
-            toTile=myTile;
+          if(self.fits(myTile.corners,toTile.corners,rotation)&&(!(toTile.placed))){
+            toTile=rotateTile[myTile];
             toTile.placed=True;
             self.syncCorners(toTile);
             return True;
