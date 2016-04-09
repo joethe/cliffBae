@@ -16,12 +16,14 @@
 <body ng-app="mainApp" ng-controller="testGameCtl as testGameCtl">
 <div ng-include="'views/navbar/navbar.html'"></div>
 
-    <div class="container">
+    <div class="">
 
-        <div id="game" class="col-md-12"></div>
+        <div id="game" class=""></div>
         <script>
-            Crafty.init(screen.availWidth, screen.availHeight, document.getElementById('game'));
-            console.log(screen.availWidth);
+            var gameBoard = document.getElementById("game");
+            Crafty.init(gameBoard.availWidth, gameBoard.availHeight, document.getElementById('game'));
+            console.log("Screen Width: " + screen.availWidth);
+            console.log("Screen Height: " + screen.availHeight);
             Crafty.e('2D, DOM, Color, Fourway')
                 .attr({x: 0, y: 0, w: 100, h: 100})
                 .color('#696969')
