@@ -18,3 +18,9 @@
   content: "#" attr(id);
   font-weight: bold;
 }
+
+img {
+    display: block;
+    width: 100px;
+    height: auto;
+}
