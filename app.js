@@ -44,6 +44,10 @@ app.get('/testgames', function(req, res){
     res.sendFile('public/views/testgames/testgames.html', options);
 });
 
+app.get('/game', function(req, res){
+    res.sendFile('public/views/game/game.html', options);
+});
+
 app.get('/art', function(req, res){
     res.sendFile('public/views/art/art.html', options);
 });
