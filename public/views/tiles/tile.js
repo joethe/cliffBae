@@ -5,10 +5,24 @@
 
         //here's your damn chifshitz.
         var tiles = [
-          {'x'=0,'y'=0,'corners':["rock","rock","grass","grass","water","grass",]},
-          {'x'=1,'y'=0,'corners':["grass","grass","grass","grass","grass","rock"]},
-          {'x'=1,'y'=-1,'corners':["grass","grass","grass","grass","grass","grass"]}
+          {'x':0,'y':0,'corners':["rock","rock","grass","grass","water","grass",]},
+          {'x':1,'y':0,'corners':["grass","grass","grass","grass","grass","rock"]},
+          {'x':1,'y':-1,'corners':["grass","grass","grass","grass","grass","grass"]},
+          {'x':0,'y':1,'corners':["empty","empty","grass","rock","rock","empty"]},
+          {'x':2,'y':-1,'corners':["grass","empty","empty","empty","grass","grass"]},
+          {'x':0,'y':-1,'corners':["water","grass","grass","empty","empty","empty"]}
         ];
+
+        getCoordinates = function(tile){
+          return [(tile.x+(tile.y/2)),(tile.y)];
+        }
+        getTileC=function(x,y){
+          return getTile();
+        }
+
+        placeTileC=funciton(x,y,rotation){
+          placeTile(getTile(,Math.floor(x-(y*2))),getTile(),rotation);
+        }
 
       /*  var nullTile = {'corners':["empty","empty","empty","empty","empty","empty"]}*/
 /*
