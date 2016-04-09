@@ -39,7 +39,31 @@ pixlePlaceTileC=funciton(x,y,rotation){
   placeTile(getTile(xScale*Math.floor(x-(y*2)),yScale*y).x,getTile(xScale*Math.floor(x-(y*2)),yScale*y).y,rotation);
 }*/
 
-/*  var nullTile = {'corners':["empty","empty","empty","empty","empty","empty"]}*/
+        reframeCoordinates = function(){
+          xMax=0;
+          xMin=0;
+          yMax=0;
+          yMin=0;
+          tiles.forEach(function(tile){
+            if(tile.x<xMin){xMin=tile.x;}
+            if(tile.x>xMax){xMax=time.x;}
+            if(tile.y<xMin){yMin=tile.y;}
+            if(tile.y>xMax){xMax=time.y;}
+          }
+          shiftCoordinates(-(xMin),-(yMin));
+          return {'xMax':xMax-xMin,'yMax':yMax-yMin}
+        }
+
+        /*
+        pixleGetTile=function(x,y){
+          return getTile();
+        }
+
+        pixlePlaceTileC=funciton(x,y,rotation){
+          placeTile(getTile(xScale*Math.floor(x-(y*2)),yScale*y).x,getTile(xScale*Math.floor(x-(y*2)),yScale*y).y,rotation);
+        }*/
+
+      /*  var nullTile = {'corners':["empty","empty","empty","empty","empty","empty"]}*/
 /*
 placements=function(myTile,toTile){
   var arr=[];
