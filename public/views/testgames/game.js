@@ -30,7 +30,7 @@ function drawBoard() {
     var tileXMod = tileWidth * (29/30);
     var tileYMod = .72 * tileHeight;
 
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < tiles.length; i++) {
         context.drawImage(
             tiles[i],
             (tileXMod * (i % tilesPerRow)) + ((tileXMod/2) * Math.floor((i/tilesPerRow)%2)),    // X position of the tile
