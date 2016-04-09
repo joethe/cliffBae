@@ -1,0 +1,31 @@
+<DOCTYPE! html>
+
+
+<html>
+<head>
+
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+    <!-- Loading Javascript Stuff -->
+    <script type="text/javascript" src="angularjs/angular.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="views/main/main.controller.js"></script>
+    <script type="text/javascript" src="views/navbar/navbar.controller.js"></script>
+</head>
+
+
+<body ng-app="mainApp" ng-controller="mainCtrl as mainControl">
+
+<div ng-include="'views/navbar/navbar.html'"></div>
+
+    <hr>
+    <div class="container">
+    	<div class="jumbotron">
+	    <h1> This is an awful game that we are making! </h1>
+	    <h3> We're using Craftyjs, and this server is just some basic MEAN stack... but without the Mongo... </h3>
+    	</div>
+    </div>
+</body>
+
+</html>

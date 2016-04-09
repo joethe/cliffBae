@@ -1,0 +1,25 @@
+{
+  "name": "cliffBae",
+  "version": "1.0.0",
+  "description": " Shenanigans",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joethe/cliffBae.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joethe/cliffBae/issues"
+  },
+  "homepage": "https://github.com/joethe/cliffBae",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "craftyjs": "^0.7.1",
+    "express": "^4.13.4",
+    "nodejs": "0.0.0"
+  }
+}
