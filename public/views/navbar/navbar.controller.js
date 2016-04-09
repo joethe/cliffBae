@@ -8,6 +8,7 @@ angular.module('mainApp').controller('navbarCtrl', function(){
         {text: "About", link: '/about'},
         {text: "Test Games", link: '/testgames'},
         {text: "Art Assets", link: '/art'},
+        {text: "Quotes", link: '/quotes'},
 	{text: "Game", link: '/game'}
     ];
 });
