@@ -55,6 +55,10 @@ app.get('/art', function(req, res){
     res.sendFile('public/views/art/art.html', options);
 });
 
+app.get('/tiles', function(req, res){
+    res.sendFile('public/views/tiles/tiles.html', options);
+});	
+
 app.get('/', function(req, res){
     res.sendFile('public/views/main/index.html', options);
 });

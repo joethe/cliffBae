@@ -10,6 +10,7 @@ angular.module('mainApp').controller('navbarCtrl', function(){
         {text: "Art Assets", link: '/art'},
         {text: "Quotes", link: '/quotes'},
         {text: "Snap", link: '/snap'},
+	{text: "Tiles", link: '/tiles'},
 	{text: "Game", link: '/game'}
     ];
 });
