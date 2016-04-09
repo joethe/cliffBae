@@ -26,6 +26,16 @@
 	    <h3> We're using Craftyjs, and this server is just some basic MEAN stack... but without the Mongo... </h3>
     	</div>
     </div>
+    <div id="game"></div>
+   <script type="text/javascript" src="https://rawgithub.com/craftyjs/Crafty/release/dist/crafty-min.js"></script>
+   <script>
+     Crafty.init(500,350, document.getElementById('game'));
+     Crafty.e('2D, DOM, Color, Fourway')
+     .attr({x: 0, y: 0, w: 100, h: 100})
+     .color('#696969')
+     .fourway(200);
+   </script>
+   <div id="test">FOO BAR TEST LINE</div>
 </body>
 
 </html>
