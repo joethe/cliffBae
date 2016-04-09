@@ -42,7 +42,7 @@ angular.module('mainApp').controller('artCtl', function(){
         "RRRGGG.png",
         "RRRRGG.png",
         "RRRRRR.png",
-        "tilePlaceholder.png",
+        "placeHolder.png",
         "WGWWWW.png",
         "WWGGGW.png",
         "WWGGRG.png",
