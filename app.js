@@ -31,6 +31,9 @@ app.use(express.static('bower_components'));
 // app.get('/kittens', function(req, res){ etc... }) -- defining a function to handle the request for '/kittens' (req = request, res = response)
 // app.get('/kittens', function(req, res){ res.send('kittens!"); }); -- responding to the request by sending the string "kittens!" to the browser.
 
+app.get('/quotes', function(req, res){
+    res.sendFile('public/views/quotes/quotes.html', options);
+});
 
 app.get('/about', function(req, res){
     res.sendFile('public/views/about/about.html', options);
@@ -53,8 +56,3 @@ var server = app.listen(9000, function(){
 
    console.log("server listening on http://%s:%s", host, port);
 });
-
-
-
-
-
