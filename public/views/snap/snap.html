@@ -17,21 +17,10 @@
 <body ng-app="mainApp" ng-controller="snapCtrl as snapCtrl">
 <div ng-include="'views/navbar/navbar.html'"></div>
 
-    <div id="drag-1" class="draggable">
-      <p> You can drag one element </p>
-    </div>
-    <div id="drag-2" class="draggable">
-        <p> with each pointer </p>
-    </div>
-
-    <div class="draggable">
-        <img src="{{snapCtrl.imagesPath}}{{snapCtrl.colOneImages[0]}}" \>
-    </div>
-
     <ul class="list-unstyled" ng-repeat="image in snapCtrl.colOneImages">
         <li>
             <div class="draggable list-item">
-                <img src="{{snapCtrl.imagesPath}}{{image}}" class="dragable"/>
+                <img src="{{snapCtrl.imagesPath}}{{image}}" class="draggable"/>
             </div>
         </li>
     </ul>

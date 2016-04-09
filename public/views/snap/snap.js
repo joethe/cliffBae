@@ -1,16 +1,15 @@
+var tar = [
+    {x: 50, y: 150, range: 50},
+    {x: 150, y: 150, range: 50},
+    {x: 250, y: 150, range: 50},
+    {x: 350, y: 150, range: 50},
+    {x: 450, y: 150, range: 50},
+];
+
 // target elements with the "draggable" class
 interact('.draggable')
   .draggable({
-
-    snap: { targets: [
-    // give this function the x and y page coords
-    // and snap to the object returned
-    function (x, y) {
-      return { x: x,
-               y: (75 + 50 * Math.sin(x * 0.04)),
-               range: 100 };
-    }
-  ]},
+    snap: { targets: tar},
 
     // enable inertial throwing
     inertia: true,
@@ -34,7 +33,8 @@ interact('.draggable')
         + (Math.sqrt(event.dx * event.dx +
                      event.dy * event.dy)|0) + 'px');
     }
-  });
+  })
+  .dropzone({overlap: 'center'});
 
   function dragMoveListener (event) {
     var target = event.target,
