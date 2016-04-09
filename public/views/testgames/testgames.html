@@ -8,7 +8,6 @@
     <script type="text/javascript" src="angularjs/angular.js"></script>
 
     <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="views/testgames/game.js"></script>
     <script type="text/javascript" src="views/testgames/testGame.controller.js"></script>
     <script type="text/javascript" src="views/navbar/navbar.controller.js"></script>
     <script type="text/javascript" src="https://rawgithub.com/craftyjs/Crafty/release/dist/crafty-min.js"></script>
@@ -17,9 +16,11 @@
 <body ng-app="mainApp" ng-controller="testGameCtl as testGameCtl">
 <div ng-include="'views/navbar/navbar.html'"></div>
 
+    <canvas id="game"></canvas>
 
-<div id="test">FOO BAR TEST LINE</div>
+    <script type="text/javascript" src="views/testgames/game.js"></script>
 
+    <div id="test">FOO BAR TEST LINE</div>
 
 </body>
 
