@@ -1,28 +1,41 @@
 //==================== MAIN CONTROLLER ==================================
     angular.module('mainApp').controller('mainCtrl', function(){
         var mainControl = this;
+
         console.log("Main controller loaded with cliffshit!");
+
+
 
         //here's your damn chifshitz.
         var tiles = [
-          {'x':0,'y':0,'corners':["rock","rock","grass","grass","water","grass",]},
-          {'x':1,'y':0,'corners':["grass","grass","grass","grass","grass","rock"]},
-          {'x':1,'y':-1,'corners':["grass","grass","grass","grass","grass","grass"]},
-          {'x':0,'y':1,'corners':["empty","empty","grass","rock","rock","empty"]},
-          {'x':2,'y':-1,'corners':["grass","empty","empty","empty","grass","grass"]},
-          {'x':0,'y':-1,'corners':["water","grass","grass","empty","empty","empty"]}
+          {'x':0,'y':0,'pixleX'=0,'pixleY'=0,'corners':["rock","rock","grass","grass","water","grass",],'placed':True},
+          {'x':1,'y':0,'pixleX'=0,'pixleY'=0,'corners':["grass","grass","grass","grass","grass","rock"],'placed':True},
+          {'x':1,'y':-1,'pixleX'=0,'pixleY'=0,'corners':["grass","grass","grass","grass","grass","grass"],'placed':True},
+          {'x':0,'y':1,'pixleX'=0,'pixleY'=0,'corners':["empty","empty","grass","rock","rock","empty"],'placed':False},
+          {'x':2,'y':-1,'pixleX'=0,'pixleY'=0,'corners':["grass","empty","empty","empty","grass","grass"],'placed':False},
+          {'x':0,'y':-1,'pixleX'=0,'pixleY'=0,'corners':["water","grass","grass","empty","empty","empty"],'placed':False}
         ];
 
-        getCoordinates = function(tile){
-          return [(tile.x+(tile.y/2)),(tile.y)];
+        var yS;
+        var xS;
+
+        scaleCoordinates = function(xScale,yScale){
+          yS=yScale;
+          xS=xScale;
+          tiles.forEach(function(tile){
+            tile.pixleX=tile.x*xScale;
+            tile.pixleY=tile.y*yScale;
+          }
         }
-        getTileC=function(x,y){
+
+        /*
+        pixleGetTile=function(x,y){
           return getTile();
         }
 
-        placeTileC=funciton(x,y,rotation){
-          placeTile(getTile(,Math.floor(x-(y*2))),getTile(),rotation);
-        }
+        pixlePlaceTileC=funciton(x,y,rotation){
+          placeTile(getTile(xScale*Math.floor(x-(y*2)),yScale*y).x,getTile(xScale*Math.floor(x-(y*2)),yScale*y).y,rotation);
+        }*/
 
       /*  var nullTile = {'corners':["empty","empty","empty","empty","empty","empty"]}*/
 /*
@@ -42,7 +55,7 @@
         return arr;
       }*/
         //tile,n->tile
-        getNeighbor[tile,n]{
+        /*getNeighbor[tile,n]{
           var m=0;
           if(n==m++){
             //top right
@@ -63,7 +76,7 @@
             //top left
             return self.getTile(tile.x-1,tile.y+1,2,tile,);
           }
-        }
+        }*/
 /*
         thing=function(a,b){
           if(a=="empty"){return b}else{if(a==b){return a}else{throw "error: tiles unsynced"}}
@@ -72,23 +85,23 @@
         //x,y-->void
         syncCorners=function(x,y){
           //my 0 is there 4 ;my 1 is there 3 they are at me + (1,1)
-          self.getTile(x+1,y+1).corners[4]=self.getTile(x,y).corners(0);
-          self.getTile(x+1,y+1).corners[3]=self.getTile(x,y).corners(1);
+          self.getTile(x+1*xS,y*yS+1).corners[4]=self.getTile(x,y).corners(0);
+          self.getTile(x+1*xS,y*yS+1).corners[3]=self.getTile(x,y).corners(1);
           //my 1 is there 5;my 2 is there 4 they are at me + (1,0)
-          self.getTile(x+1,y).corners[1]=self.getTile(x,y).corners(5);
-          self.getTile(x+1,y).corners[2]=self.getTile(x,y).corners(4);
+          self.getTile(x+1*xS,y*yS).corners[1]=self.getTile(x,y).corners(5);
+          self.getTile(x+1*xS,y*yS).corners[2]=self.getTile(x,y).corners(4);
           //my 2 is there 0;my 3 is there 5 they are at me + (1,-1)
-          self.getTile(x+1,y-1).corners[2]=self.getTile(x,y).corners(0);
-          self.getTile(x+1,y-1).corners[3]=self.getTile(x,y).corners(5);
+          self.getTile(x+1*xS,y*yS-1).corners[2]=self.getTile(x,y).corners(0);
+          self.getTile(x+1*xS,y*yS-1).corners[3]=self.getTile(x,y).corners(5);
           //my 3 is there 1;my 4 is there 0 they are at me + (0,-1)
-          self.getTile(x,y-1).corners[3]=self.getTile(x,y).corners(1);
-          self.getTile(x,y-1).corners[4]=self.getTile(x,y).corners(0);
+          self.getTile(x,y*yS-1).corners[3]=self.getTile(x,y).corners(1);
+          self.getTile(x,y*yS-1).corners[4]=self.getTile(x,y).corners(0);
           //my 4 is there 2;my 5 is there 1 they are at me + (-1,0)
-          self.getTile(x-1,y).corners[4]=self.getTile(x,y).corners(2);
-          self.getTile(x-1,y).corners[5]=self.getTile(x,y).corners(1);
+          self.getTile(x-1*xS,y*yS).corners[4]=self.getTile(x,y).corners(2);
+          self.getTile(x-1*xS,y*yS).corners[5]=self.getTile(x,y).corners(1);
           //my 5 is their 3;my 0 is there 2 they are at me + (-1,1)
-          self.getTile(x-1,y+1).corners[5]=self.getTile(x,y).corners(3);
-          self.getTile(x-1,y+1).corners[0]=self.getTile(x,y).corners(2);
+          self.getTile(x-1*xS,y*yS+1).corners[5]=self.getTile(x,y).corners(3);
+          self.getTile(x-1*xS,y*yS+1).corners[0]=self.getTile(x,y).corners(2);
         }
 
         //corners,corners,int 0-5 --> boolean
