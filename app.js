@@ -36,6 +36,15 @@ app.get('/about', function(req, res){
     res.sendFile('public/views/about/about.html', options);
 });
 
+
+app.get('/testgames', function(req, res){
+    res.sendFile('public/views/testgames/testgames.html', options);
+});
+
+app.get('/art', function(req, res){
+    res.sendFile('public/views/art/art.html', options);
+});
+
 app.get('/', function(req, res){
     res.sendFile('public/views/main/index.html', options);
 });

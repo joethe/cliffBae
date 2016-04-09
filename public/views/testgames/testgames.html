@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+    <!-- Loading Javascript Stuff -->
+    <script type="text/javascript" src="angularjs/angular.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="views/testgames/testGame.controller.js"></script>
+    <script type="text/javascript" src="views/navbar/navbar.controller.js"></script>
+</head>
+
+<body ng-app="mainApp" ng-controller="testGameCtl as testGameCtl">
+<div ng-include="'views/navbar/navbar.html'"></div>
+
+
+<hr>
+<div class="container">
+	<div class="jumbotron">
+		<h1> Game Test Page </h1>
+		<h3> This page is for Henry to test out game engine stuff without messing up any other parts of the project! </h3>
+    	</div>
+</div>
+
+
+    <div id="game"></div>
+   <script type="text/javascript" src="https://rawgithub.com/craftyjs/Crafty/release/dist/crafty-min.js"></script>
+   <script>
+     Crafty.init(500,350, document.getElementById('game'));
+     Crafty.e('2D, DOM, Color, Fourway')
+     .attr({x: 0, y: 0, w: 100, h: 100})
+     .color('#696969')
+     .fourway(200);
+   </script>
+   <div id="test">FOO BAR TEST LINE</div>
+
+
+</body>
+
+</html
