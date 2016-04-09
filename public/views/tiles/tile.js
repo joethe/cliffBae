@@ -34,10 +34,8 @@ var scaleCoordinates = function(xScale,yScale){
 pixleGetTile=function(x,y){
   return getTile();
 }
+*/
 
-pixlePlaceTileC=funciton(x,y,rotation){
-  placeTile(getTile(xScale*Math.floor(x-(y*2)),yScale*y).x,getTile(xScale*Math.floor(x-(y*2)),yScale*y).y,rotation);
-}*/
 
         reframeCoordinates = function(){
           xMax=0;
@@ -156,6 +154,9 @@ function rotateTile(tile,rotation){
   return mytile;
 }
 //getTile(x,y),getNeighbot(getTile(x,y),n)-->boolean
+
+
+
 var placeTile=function(myTile,toTile,rotation){
   if(self.fits(myTile.corners,toTile.corners,rotation)&&(!(toTile.placed))){
     toTile=rotateTile[myTile];
@@ -180,13 +181,21 @@ window.onload = function() {
     drawBoard();
 }
 
+/*placeTileC=funciton(tile){
+  var x=tile.x;
+  var y=tile.y;
+  placeTile(getTile(Math.floor(x-(y*2)),(3*y)/4),getTile(xScale*Math.floor(x-(y*2)),yScale*y).y,rotation);
+}*/
+
 function drawBoard() {
     for (var i = 0; i < tiles.length; i++) {
         console.log("Drawing a tile... X=" + tiles[i].x + ", Y=" + tiles[i].y)
+        var x=tiles[i].x;
+        var y=tiles[i].y;
         context.drawImage(
             tiles[i].placed ? realTile : emptyTile,
-            tiles[i].x,
-            tiles[i].y,
+            Math.floor(x-(y*2)),
+            (3*y)/4,
             xS,
             yS
         )
