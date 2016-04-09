@@ -1,5 +1,3 @@
-
-
 class tile {
   self = this;
   constructor(corners, x, y) {
@@ -15,24 +13,7 @@ class tile {
     //iterate over corners and return array of coord pairs
     //or misc reference.
   }
-}
-
-
-function tokenedTile(e i a) {
-  e.token != nil
-}
-
-function score(tiles) {
-  w=0;
-  b=0;
-  u=0;
-  while (!tiles.empty?) {
-    tiles.find(tokenedTile())
-    while (have found good neighbor) {
-
-    }
-    }
-
+  conventionalCoords(){
+    //do math
   }
-  return {white: w, black: b, unclaimed: u}
 }
