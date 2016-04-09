@@ -31,22 +31,22 @@
         getNeighbor[tile,n]{
           var m=0;
           if(n==m++){
-            \\top right
+            //top right
             return self.getTile(tile.x+1,tile.y+1);
           }elseif(n==m++){
-            \\right
+            //right
             return self.getTile(tile.x+1,tile.y);
           }elseif(n==m++){
-            \\bottom right
+            //bottom right
             return self.getTile(tile.x+1,tile.y1-1);
           }elseif(n==m++){
-            \\bottom left
+            //bottom left
             return self.getTile(tile.x,tile.y-1,0);
           }elseif(n==m++){
-            \\left
+            //left
             return self.getTile(tile.x-1,tile.y,tile,);
           }else{
-            \\top left
+            //top left
             return self.getTile(tile.x-1,tile.y+1,2,tile,);
           }
         }
