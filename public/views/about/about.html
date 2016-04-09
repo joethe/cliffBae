@@ -1,0 +1,30 @@
+<DOCTYPE! html>
+
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+        <!-- Loading Javascript Stuff -->
+        <script type="text/javascript" src="angularjs/angular.js"></script>
+
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="views/main/main.controller.js"></script>
+        <script type="text/javascript" src="views/navbar/navbar.controller.js"></script>
+    </head>
+
+
+<body ng-app="mainApp" ng-controller="aboutCtrl as about">
+
+<div ng-include="'views/navbar/navbar.html'"></div>
+
+    <hr>
+    <div class="container hero-unit">
+	    <h1 class="jumbotron"> This is an awful game that we are making! </h1>
+        <br><br>
+	    <p>This is a game that we created at <a href="https://carlhacks.com/">CarlHacks 2016</a>, a Hackathon hosted by the Carleton college. Teams are given 36 hours to create a project of their choice, and make it happen.</p>
+
+        <p>Our project is to recreate a board game called Fjords which some of the members of our group are a great fan of, but is now (sadly) out of print. Fjords is a 2-player strategy game where players place terrain tiles and create a unique board, before creating farms to claim their territory and fend off the enemy farmer.</p>
+    </div>
+</body>
+
+</html>
