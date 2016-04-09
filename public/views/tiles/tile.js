@@ -197,7 +197,7 @@ function drawBoard() {
         var y=tiles[i].y;
         context.drawImage(
             tiles[i].placed ? realTile : emptyTile,
-            Math.floor(x-(y*2)),
+            x-(y/2),
             (3*y)/4,
             xS,
             yS
