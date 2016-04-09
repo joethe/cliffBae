@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+    <!-- Loading Javascript Stuff -->
+    <script type="text/javascript" src="angularjs/angular.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="views/art/art.controller.js"></script>
+    <script type="text/javascript" src="views/navbar/navbar.controller.js"></script>
+</head>
+
+<body ng-app="mainApp" ng-controller="artCtl as artCtl">
+<div ng-include="'views/navbar/navbar.html'"></div>
+
+<div class="container">
+	<div class="jumbotron">
+		<h1>This page is for displaying art assets for the game."</h1>
+	</div>
+</div>
+
+</body>
+
+
+</html>
