@@ -19,13 +19,35 @@
         var yS;
         var xS;
 
+        shiftCoordinates = function(xShift,yShift){
+          tiles.forEach(function(tile)){
+            tile.x=tile.x+xShift;
+            tile.y=tile.y+yShift;
+          }
+        }
+
         scaleCoordinates = function(xScale,yScale){
           yS=yScale;
           xS=xScale;
           tiles.forEach(function(tile){
-            tile.X=tile.x*xScale;
-            tile.Y=tile.y*yScale;
+            tile.x=tile.x*xScale;
+            tile.y=tile.y*yScale;
           }
+        }
+
+        reframeCoordinates = function(){
+          xMax=0;
+          xMin=0;
+          yMax=0;
+          yMin=0;
+          tiles.forEach(function(tile){
+            if(tile.x<xMin){xMin=tile.x;}
+            if(tile.x>xMax){xMax=time.x;}
+            if(tile.y<xMin){yMin=tile.y;}
+            if(tile.y>xMax){xMax=time.y;}
+          }
+          shiftCoordinates(-(xMin),-(yMin));
+          return {'xMax':xMax-xMin,'yMax':yMax-yMin}
         }
 
         /*
@@ -122,6 +144,7 @@
           tiles.push({'x':x,'y':y,'placed':False,'corners':["empty","empty","empty","empty","empty","empty"]});
           return getTile(x,y);
         }
+
         rotateTile(tile,rotation){
           var mytile = tile
           for(var i;i<6;i++){
@@ -135,6 +158,7 @@
             toTile=rotateTile[myTile];
             toTile.placed=True;
             self.syncCorners(toTile);
+            self.reframeCoordinates();
             return True;
           }else{
             return False;
