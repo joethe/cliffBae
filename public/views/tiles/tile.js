@@ -1,23 +1,33 @@
+var canvas = document.getElementById("game");
+canvas.width = screen.width - 20;
+canvas.height = 1000;
+var context = canvas.getContext("2d");
+
+var width = canvas.width;
+var height = canvas.height;
+
 //here's your damn chifshitz.
 var tiles = [
-  {'x':0,'y':0,'corners':["rock","rock","grass","grass","water","grass",],'placed':True},
-  {'x':1,'y':0,'corners':["grass","grass","grass","grass","grass","rock"],'placed':True},
-  {'x':1,'y':-1,'corners':["grass","grass","grass","grass","grass","grass"],'placed':True},
-  {'x':0,'y':1,'corners':["empty","empty","grass","rock","rock","empty"],'placed':False},
-  {'x':2,'y':-1,'corners':["grass","empty","empty","empty","grass","grass"],'placed':False},
-  {'x':0,'y':-1,'corners':["water","grass","grass","empty","empty","empty"],'placed':False}
+  {'x':0,'y':0,'corners':["rock","rock","grass","grass","water","grass",],'placed':true},
+  {'x':1,'y':0,'corners':["grass","grass","grass","grass","grass","rock"],'placed':true},
+  {'x':1,'y':-1,'corners':["grass","grass","grass","grass","grass","grass"],'placed':true},
+  {'x':0,'y':1,'corners':["empty","empty","grass","rock","rock","empty"],'placed':false},
+  {'x':2,'y':-1,'corners':["grass","empty","empty","empty","grass","grass"],'placed':false},
+  {'x':0,'y':-1,'corners':["water","grass","grass","empty","empty","empty"],'placed':false}
 ];
 
 var yS;
 var xS;
 
-scaleCoordinates = function(xScale,yScale){
-  yS=yScale;
-  xS=xScale;
-  tiles.forEach(function(tile){
-    tile.X=tile.x*xScale;
-    tile.Y=tile.y*yScale;
-  }
+var scaleCoordinates = function(xScale,yScale){
+    console.log("Scaling coords");
+    yS=yScale;
+    xS=xScale;
+    tiles.forEach(function(tile){
+        tile.x=tile.x*xScale;
+        tile.y=tile.y*yScale;
+        console.log("Scaling a tile...");
+});
 }
 
 /*
@@ -75,7 +85,7 @@ thing=function(a,b){
 }*/
 
 //x,y-->void
-syncCorners=function(x,y){
+var syncCorners=function(x,y){
   //my 0 is there 4 ;my 1 is there 3 they are at me + (1,1)
   self.getTile(x+1*xS,y*yS+1).corners[4]=self.getTile(x,y).corners(0);
   self.getTile(x+1*xS,y*yS+1).corners[3]=self.getTile(x,y).corners(1);
@@ -97,7 +107,7 @@ syncCorners=function(x,y){
 }
 
 //corners,corners,int 0-5 --> boolean
-fits=function(array1,array2,rotation){
+var fits=function(array1,array2,rotation){
   for(var i=0;i<6;i++){
     if(array1[i]=="empty"){throw "empty in player piece";}
     if((array2[i]!="empty")&&(array2[i]!=array1[(i+rotation)%6])){
@@ -107,14 +117,14 @@ fits=function(array1,array2,rotation){
 }
 
 //x,y-> getTile(x,y) or False
-getTile=function(x,y){
+var getTile=function(x,y){
   self.tiles.forEach(function(z){
     if (z.x==x&&z.y==y){return z;}
   })
   tiles.push({'x':x,'y':y,'placed':False,'corners':["empty","empty","empty","empty","empty","empty"]});
   return getTile(x,y);
 }
-rotateTile(tile,rotation){
+function rotateTile(tile,rotation){
   var mytile = tile
   for(var i;i<6;i++){
     mytile.corners[i]=tile.corners[(i+rotation)%6];
@@ -122,7 +132,7 @@ rotateTile(tile,rotation){
   return mytile;
 }
 //getTile(x,y),getNeighbot(getTile(x,y),n)-->boolean
-placeTile=function(myTile,toTile,rotation){
+var placeTile=function(myTile,toTile,rotation){
   if(self.fits(myTile.corners,toTile.corners,rotation)&&(!(toTile.placed))){
     toTile=rotateTile[myTile];
     toTile.placed=True;
@@ -132,3 +142,42 @@ placeTile=function(myTile,toTile,rotation){
     return False;
   }
 }
+
+var emptyTile = new Image();
+emptyTile.src = "assets/images/placeHolder.png";
+var realTile = new Image();
+realTile.src = "assets/images/GGGGGG.png";
+
+// {'x':0,'y':0,'corners':["rock","rock","grass","grass","water","grass",],'placed':True}
+window.onload = function() {
+    console.log("File loaded");
+    scaleCoordinates(120, 130);
+    clearCanvas();
+    drawBoard();
+}
+
+function drawBoard() {
+    for (var i = 0; i < tiles.length; i++) {
+        console.log("Drawing a tile... X=" + tiles[i].x + ", Y=" + tiles[i].y)
+        context.drawImage(
+            tiles[i].placed ? realTile : emptyTile,
+            tiles[i].x,
+            tiles[i].y,
+            xS,
+            yS
+        )
+    }
+}
+
+function clearCanvas() {
+    "use strict";
+    context.clearRect(0, 0, width, height);
+}
+/*
+setInterval(function () {
+    "use strict";
+    scaleCoordinates(120, 130);
+    clearCanvas();
+    drawBoard();
+}, 1000 / 200);
+*/

@@ -6,11 +6,27 @@ var context = canvas.getContext("2d");
 
 var tiles = [];
 
+var tileWidth = 120;
+var tileHeight = 130;
+
+var tilesPerRow = 10;
+
+// {Image, location, neighbor locations, corners, empty?}
 function makeBoard() {
     for (var i = 0; i < 100; i++) {
-        tiles.push(new Image());
-        tiles[i].src = "assets/images/placeHolder.png";
+        tiles.push({
+            image: (new Image()).src = "assets/images/placeHolder.png",
+            location: i,
+            neighbors: getNeighbors(i),
+            corners: [null, null, null, null, null, null],
+            placed: false}
     }
+}
+
+function getNeighbors(index) {
+    if (index % tilesPerRow === 0) { // If on the left/right side
+
+    } else if ()
 }
 
 var width = canvas.width;
@@ -23,9 +39,6 @@ function clearCanvas() {
 
 function drawBoard() {
     "use strict";
-    var tilesPerRow = 10;
-    var tileWidth = 120;
-    var tileHeight = 130;
 
     var tileXMod = tileWidth * (29/30);
     var tileYMod = .72 * tileHeight;
