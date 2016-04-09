@@ -186,8 +186,8 @@ window.onload = function() {
   var y=tile.y;
   placeTile(getTile(Math.floor(x-(y*2)),(3*y)/4),getTile(xScale*Math.floor(x-(y*2)),yScale*y).y,rotation);
 }*/
-revertX=function(x,y){return x + ((8/3)*y);}
-revertY=function(y){return (4/3)*y;}
+var revertX=function(x,y){return x + ((8/3)*y);}
+var revertY=function(y){return (4/3)*y;}
 
 
 function drawBoard() {
