@@ -47,7 +47,7 @@ pixleGetTile=function(x,y){
             if(tile.x>xMax){xMax=time.x;}
             if(tile.y<xMin){yMin=tile.y;}
             if(tile.y>xMax){xMax=time.y;}
-          }
+          })
           shiftCoordinates(-(xMin),-(yMin));
           return {'xMax':xMax-xMin,'yMax':yMax-yMin}
         }
@@ -186,6 +186,9 @@ window.onload = function() {
   var y=tile.y;
   placeTile(getTile(Math.floor(x-(y*2)),(3*y)/4),getTile(xScale*Math.floor(x-(y*2)),yScale*y).y,rotation);
 }*/
+revertX=function(x,y){return x + ((8/3)*y);}
+revertY=function(y){return (4/3)*y;}
+
 
 function drawBoard() {
     for (var i = 0; i < tiles.length; i++) {
