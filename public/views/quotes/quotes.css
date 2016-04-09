@@ -1,0 +1,24 @@
+* {
+  font-family: 'Oxygen', sans-serif;
+}
+
+div.quotes {
+  margin: auto;
+}
+
+div.quotes > blockquote {
+  text-align: center;
+  padding-top: 2%;
+}
+
+div.quote {
+  width: 720px;
+    margin: auto;
+}
+
+.attrib {
+  padding: 0%;
+  position: relative;
+  text-align: right;
+  font-size: small;
+}

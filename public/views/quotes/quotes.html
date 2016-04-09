@@ -4,9 +4,10 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
     <!-- Loading Javascript Stuff -->
     <script type="text/javascript" src="angularjs/angular.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="views/quotes/quotes.css">
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="views/quotes/quotes.controller.js"></script>
     <script type="text/javascript" src="views/navbar/navbar.controller.js"></script>
@@ -15,11 +16,31 @@
 <body ng-app="mainApp" ng-controller="quotesCtrl as quotesCtrl">
 <div ng-include="'views/navbar/navbar.html'"></div>
 
-<div id=quotes>
-    <p>"My feet smell pleasant today!" - Henry"</p>
-    <p>"You guys need to start saying amusing shit... I can't be the only one" - Henry</p>
+<div class=quotes>
+  <div class=quote>
+    <blockquote>"My feet smell pleasant today!"</blockquote>
+    <p class=attrib>- Henry</p>
+  </div>
+  <div class=quote>
+    <blockquote>"You guys need to start saying amusing shit... I can't be the only one"</blockquote>
+    <p class=attrib>- Henry</p>
+  </div>
+  <div class=quote>
+    <blockquote>"My style is not idiomatic with the programming language..." </blockquote>
+    <p class=attrib>- Sean</p>
+  </div>
+  <div class=quote>
+    <blockquote>
+      "... Draggables"
+      "Dragon Balls?"
+      "Draggables."
+      "Dragon Testicles."
+      "Testicles."
+      "Yeah."
+    </blockquote>
+    <p class=attrib>- Henry and Sean</p>
+  </div>
 
-    <p>"My style is not idiomatic with the programming language..." - Sean </p>
 </div>
 
 </body>
