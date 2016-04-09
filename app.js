@@ -39,6 +39,9 @@ app.get('/about', function(req, res){
     res.sendFile('public/views/about/about.html', options);
 });
 
+app.get('/snap', function(req, res){
+    res.sendFile('public/views/snap/snap.html', options);
+});
 
 app.get('/testgames', function(req, res){
     res.sendFile('public/views/testgames/testgames.html', options);
