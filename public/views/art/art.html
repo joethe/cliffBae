@@ -2,6 +2,7 @@
 
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="views/art/art.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
     <!-- Loading Javascript Stuff -->
     <script type="text/javascript" src="angularjs/angular.js"></script>
@@ -18,12 +19,18 @@
 	<div class="jumbotron">
 		<h1>This page is for displaying art assets for the game."</h1>
 	</div>
-
-	<div class="list-group">
-		<div class="list-item"> <img src="assets/images/tilePlaceholder.png" class="img-thumbnail"/> </div>
-		<div class="list-item"> <img src="assets/images/testPiece_1.png" class="img-thumbnail"/></div>
-		<div class="list-item"> <img src="assets/images/testPiece_2.png" class="img-thumbnail"/></div>
-		<div class="list-item"> <img src="assets/images/testPiece_3.png" class="img-thumbnail"/></div>
+	
+	<div class="row images">
+	<div class="col-md-6">
+		<div class="list-group">
+			<div class="list-item" ng-repeat="image in artCtl.colOneImages"> <img src="{{artCtl.imagesPath}}{{image}}" class="img-thumbnail"/> </div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="list-group">
+			<div class="list-item" ng-repeat="image in artCtl.colTwoImages"> <img src="{{artCtl.imagesPath}}{{image}}" class="img-thumbnail"/> </div>
+		</div>
+	</div>
 	</div>
 </div>
 
