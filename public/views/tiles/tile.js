@@ -23,8 +23,8 @@
           yS=yScale;
           xS=xScale;
           tiles.forEach(function(tile){
-            tile.pixleX=tile.x*xScale;
-            tile.pixleY=tile.y*yScale;
+            tile.X=tile.x*xScale;
+            tile.Y=tile.y*yScale;
           }
         }
 
@@ -140,5 +140,4 @@
             return False;
           }
         }
-
     });
