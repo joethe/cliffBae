@@ -54,7 +54,15 @@
     sideLength = 36 * 2,
     boardWidth = 4,
     boardHeight = 4,
-    lineWidth = 6;
+    lineWidth = 6,
+    currentTile = {
+      "blank": false,
+      "CoordX": null,
+      "CoordY": null,
+      "hidden": false,
+      "kites": ["rock", "rock", "rock", "grass", "grass", "grass"],
+      "visible": true
+  };
 
 
   hexHeight = Math.sin(hexagonAngle) * sideLength;
@@ -195,8 +203,8 @@
       for (j = 0; j < height; ++j) {
         tile = {
           "blank": CreateBlank(i.toString() + "," + j.toString()),
-          "CoordX": i * hexRectangleWidth + ((j % 2) * hexRadius),
-          "CoordY": j * (sideLength + hexHeight),
+          "CoordX": centerHex(i, j).x,
+          "CoordY": centerHex(i, j).y,
           "hidden": false,
           "kites": CreateKite(i.toString() + "," + j.toString()),
           "visible": true
@@ -248,19 +256,11 @@
     return arr;
   }
 
-
-  function Create2DArray(rows) {
-    var arr = [];
-    for (var i = 0; i < rows; i++) {
-      arr[i] = [];
-    }
-
-    return arr;
-  }
-
   function drawBoard(canvasContext, width, height) {
     var i,
       j;
+
+      console.log(Tiles);
 
     for (i = 0; i < width; ++i) {
       for (j = 0; j < height; ++j) {
@@ -465,5 +465,45 @@
     arr=temparr;
     return temp;
   }
+
+  function getTile(x, y) {
+      var hexY = Math.floor(y / (hexHeight + sideLength));
+      var hexX = Math.floor((x - (hexY % 2) * hexRadius) / hexRectangleWidth);
+      return {x: hexX, y: hexY};
+  }
+
+  function centerHex(i, j) {
+      var newX = i * hexRectangleWidth + ((j % 2) * hexRadius);
+      var newY = j * (sideLength + hexHeight);
+      return {x: newX, y: newY};
+  }
+
+
+  document.addEventListener("click", function(eventInfo){
+      var curTile = {
+          "blank": false,
+          "CoordX": null,
+          "CoordY": null,
+          "hidden": false,
+          "kites": ["rock", "rock", "rock", "grass", "grass", "grass"],
+          "visible": true
+      };
+      x = eventInfo.offsetX || eventInfo.layerX;
+      y = eventInfo.offsetY || eventInfo.layerY;
+
+      var selectedTile = getTile(x, y);
+      console.log(selectedTile);
+
+
+      var hexCenter = centerHex(selectedTile.x, selectedTile.y);
+      curTile.CoordX = hexCenter.x;
+      curTile.CoordY = hexCenter.y;
+
+      Tiles[selectedTile.x][selectedTile.y] = curTile;
+      console.log(Tiles);
+      console.log(currentTile);
+
+      drawBoard(canvas, boardWidth, boardHeight);
+  });
 
 })();
