@@ -262,6 +262,38 @@ var gamePieces = [
     return arr;
   }
 
+  function drawHouse(canvasContext, x, y, player) {
+    var previousFill = canvasContext.fillStyle;
+    var previousStroke = canvasContext.strokeStyle;
+
+		canvasContext.lineWidth = 5;
+    if (player==1){
+    	canvasContext.fillStyle = "#ffff66";
+      canvasContext.strokeStyle = "#ffff66";
+    }
+    else
+    {
+    	canvasContext.fillStyle = "#cc5500";
+      canvasContext.strokeStyle = "#cc5500";
+    }
+    canvasContext.fillRect(x + hexRadius-hexRectangleWidth*.3*.5, y + hexRadius-hexRectangleWidth*.3*.5, hexRectangleWidth*.3, hexRectangleWidth*.3); 
+    
+    canvasContext.beginPath();
+    canvasContext.moveTo(x + hexRadius-hexRectangleWidth*.3*.5, y + hexRadius-hexRectangleWidth*.3*.5-30);
+    
+    canvasContext.stroke();
+
+    canvasContext.beginPath();
+    canvasContext.moveTo(x + hexRadius-hexRectangleWidth*.3*.5, y+hexRadius-hexRectangleWidth*.3*.4);
+    canvasContext.lineTo(x + hexRadius, y+hexRadius-hexRectangleWidth*.3);
+    canvasContext.lineTo(x + hexRadius+hexRectangleWidth*.3*.5, y + hexRadius-hexRectangleWidth*.3*.4);
+    canvasContext.closePath();
+    canvasContext.stroke();
+
+    canvasContext.fillStyle = previousFill;
+    canvasContext.strokeStyle = previousStroke;
+  }
+
 function drawFarm(canvasContext, x, y, player) {
     var fill = fill || true;
     var previousFill = canvasContext.fillStyle;
