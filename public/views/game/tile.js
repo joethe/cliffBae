@@ -55,7 +55,8 @@ var gamePieces = [
     boardWidth = 4,
     boardHeight = 4,
     lineWidth = 6,
-    currentTile = newTile();
+    currentTile = newTile(),
+    currentPlayer = 1;
 
   hexHeight = Math.sin(hexagonAngle) * sideLength;
   hexRadius = Math.cos(hexagonAngle) * sideLength;
@@ -123,7 +124,9 @@ var gamePieces = [
           "CoordY": null,
           "hidden": false,
           "kites": MakeRandomKiteValues(),
-          "visible": true
+          "visible": true,
+          "farm": 0,
+          "house": 0
       }
       return tile;
   }
@@ -219,7 +222,9 @@ var gamePieces = [
           "CoordY": centerHex(i, j).y,
           "hidden": false,
           "kites": CreateKite(i.toString() + "," + j.toString()),
-          "visible": true
+          "visible": true,
+          "farm": 0,
+          "house": 0,
         }
         tiles[i][j] = tile;
       }
@@ -342,6 +347,9 @@ function drawFarm(canvasContext, x, y, player) {
         }
         if (Tiles[i][j].visible == true) {
           drawHexagon(ctx, Tiles[i][j].CoordX, Tiles[i][j].CoordY, false);
+        }
+        if (Tiles[i][j].farm != 0) {
+            drawFarm(ctx, Tiles[i][j].CoordX, Tiles[i][j].CoordY, Tiles[i][j].farm);
         }
       }
     }
@@ -575,18 +583,17 @@ function drawFarm(canvasContext, x, y, player) {
       currentTile.kites = kites;
   }
 
-
-  document.addEventListener("click", function(eventInfo){
+  function placeTile(x, y) { // Ugly x and y
       var curTile = {
           "blank": currentTile.blank,
           "CoordX": currentTile.CoordX,
           "CoordY": currentTile.CoordY,
           "hidden": currentTile.hidden,
           "kites": [currentTile.kites[0], currentTile.kites[1], currentTile.kites[2], currentTile.kites[3], currentTile.kites[4], currentTile.kites[5]],
-          "visible": currentTile.visible
+          "visible": currentTile.visible,
+          "farm": currentTile.farm,
+          "house": currentTile.house
       };
-      x = eventInfo.offsetX || eventInfo.layerX;
-      y = eventInfo.offsetY || eventInfo.layerY;
 
       var selectedTile = getTile(x, y);
 
@@ -601,9 +608,19 @@ function drawFarm(canvasContext, x, y, player) {
 
           drawBoard(canvas, boardWidth, boardHeight);
           currentTile = newTile();
+          return true;
       } else {
           //TODO: Visual indication of lack of playability of game piece.
+          return false;
       }
+
+  }
+
+
+  document.addEventListener("click", function(eventInfo){
+      x = eventInfo.offsetX || eventInfo.layerX;
+      y = eventInfo.offsetY || eventInfo.layerY;
+      placeTile(x, y)
   });
 
   // Key code 37 is left arrow.
@@ -615,18 +632,22 @@ function drawFarm(canvasContext, x, y, player) {
     var currY = currentTile.CoordY;
 
     switch (key) {
-        case 37:
+        case 37: // Left Arrow
             rotateTile("L");
             break;
-        case 39:
+        case 39: // Right Arrow
             rotateTile("R");
             break;
-        case 82:
+        case 70: // F
+            var placed = placeTile(currX, currY);
+            if (placed) {Tiles[getTile(currX, currY).x][getTile(currX, currY).y].farm = currentPlayer;}
+            break;
+        case 82: // R
             //TODO: Send current to player's "hand"
             currentTile = newTile();
             break;
         default:
-            console.log(event.keyCode);
+            //console.log(event.keyCode);
             break;
     }
 
