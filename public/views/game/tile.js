@@ -362,17 +362,31 @@
     }
   }
 
-  function MakeRandomKiteValues(){
-    r = Math.Random()*729;
-    return [r%3,(r=r/3)%3,(r=r/3)%3,(r=r/3)%3,(r=r/3)%3,(r=r/3)%3].forEach(function(x){if(x==0){"grass"}else if{"rock"}else{"water"}});
+  function R3(){
+    return Math.floor(Math.Random()*3);
   }
 
-  function MakeRandomKites(){
+  function MakeRandomKiteValues(){
+    return [self.R3(),self.R3(),self.R3(),self.R3(),self.R3(),self.R3()];
+  }
+
+  function MakeRandomKites(n){
     var arr;
-    for(var i = 0;i<40;i++){
-      arr.push(MakeRandomKiteValues())
+    for(var i = 0;i<n;i++){
+      arr.push(MakeRandomKiteValues();)
     }
     return arr;
+  }
+
+  function selectRandom(arr){
+    var r = Math.floor(Math.Random()*arr.length);
+    temparr;
+    temp=arr[i];
+    for(var i = 0;i<arr.length;i++){
+      if(i!=r){temparr.push(arr[i]);}
+    }
+    arr=temparr;
+    return temp;
   }
 
 })();
