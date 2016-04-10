@@ -282,11 +282,11 @@ var gamePieces = [
     	canvasContext.fillStyle = "#cc5500";
       canvasContext.strokeStyle = "#cc5500";
     }
-    canvasContext.fillRect(x + hexRadius-hexRectangleWidth*.3*.5, y + hexRadius-hexRectangleWidth*.3*.5, hexRectangleWidth*.3, hexRectangleWidth*.3); 
-    
+    canvasContext.fillRect(x + hexRadius-hexRectangleWidth*.3*.5, y + hexRadius-hexRectangleWidth*.3*.5, hexRectangleWidth*.3, hexRectangleWidth*.3);
+
     canvasContext.beginPath();
     canvasContext.moveTo(x + hexRadius-hexRectangleWidth*.3*.5, y + hexRadius-hexRectangleWidth*.3*.5-30);
-    
+
     canvasContext.stroke();
 
     canvasContext.beginPath();
@@ -319,14 +319,14 @@ function drawFarm(canvasContext, x, y, player) {
       canvasContext.strokeStyle = "#cc5500";
     }
     canvasContext.lineWidth = 5;
-    
+
 
     if (fill) {
       canvasContext.fill();
     } else {
       canvasContext.stroke();
     }
-    
+
     canvasContext.fillStyle = previousFill;
     canvasContext.strokeStyle = previousStroke;
   }
@@ -611,11 +611,29 @@ function drawFarm(canvasContext, x, y, player) {
   document.onkeydown = function(event) {
     ctx = canvas.getContext('2d');
     key = event.keyCode;
-    if (key === 37) { // Left arrow -> Rotate Counter-Clockwise
-        rotateTile("L");
-    } else if (key === 39) { // Right arrow -> Rotate Clockwise
-        rotateTile("R");
+    var currX = currentTile.CoordX;
+    var currY = currentTile.CoordY;
+
+    switch (key) {
+        case 37:
+            rotateTile("L");
+            break;
+        case 39:
+            rotateTile("R");
+            break;
+        case 82:
+            //TODO: Send current to player's "hand"
+            currentTile = newTile();
+            break;
+        default:
+            console.log(event.keyCode);
+            break;
     }
+
+    currentTile.CoordX = currX;
+    currentTile.CoordY = currY;
+
+    drawBoard(ctx, boardWidth, boardHeight);
     drawTile(ctx, currentTile.CoordX, currentTile.CoordY, true, currentTile.kites);
     drawHexagon(ctx, currentTile.CoordX, currentTile.CoordY, false);
   };
