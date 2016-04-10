@@ -65,6 +65,9 @@
   hexRectangleHeight = sideLength + 2 * hexHeight;
   hexRectangleWidth = 2 * hexRadius;
 
+  canvas.width = Math.max(660, (boardWidth * hexRectangleWidth) + 50)
+  canvas.width = Math.max(624, (boardWidth * hexRectangleHeight) + 50)
+
   Tiles = initTiles(boardWidth, boardHeight);
 
 
