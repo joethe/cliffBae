@@ -485,6 +485,25 @@ var gamePieces = [
       return {x: newX, y: newY};
   }
 
+  function rotateTile(dir) {
+      kites = currentTile.kites;
+      var temp;
+      if (dir === "L") {
+          temp = kites[0];
+          for (var i = 0; i < kites.length - 1; i++) {
+              kites[i] = kites[i + 1];
+          }
+          kites[5] = temp;
+      } else if (dir === "R") {
+          temp = kites[5];
+          for (var i = 5; i > 0; i--) {
+              kites[i] = kites[i - 1];
+          }
+          kites[0] = temp;
+      }
+      currentTile.kites = kites;
+  }
+
 
   document.addEventListener("click", function(eventInfo){
       var curTile = {
@@ -510,5 +529,17 @@ var gamePieces = [
       drawBoard(canvas, boardWidth, boardHeight);
       currentTile = newTile();
   });
+
+  // Key code 37 is left arrow.
+  // Key code 39 is right arrow.
+  document.onkeydown = function(event) {
+    key = event.keyCode;
+    if (key === 37) { // Left arrow -> Rotate Counter-Clockwise
+        rotateTile("L");
+    } else if (key === 39) { // Right arrow -> Rotate Clockwise
+        rotateTile("R");
+    }
+    drawBoard(canvas, boardWidth, boardHeight);
+  };
 
 })();
