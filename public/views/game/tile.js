@@ -363,7 +363,8 @@
   }
 
   function R3(){
-    return Math.floor(Math.Random()*3);
+    var n = Math.floor(Math.Random()*3);
+    if(n==0){return "grass";}else if(n==1){return "rock";}else{return "water";}
   }
 
   function MakeRandomKiteValues(){
