@@ -57,7 +57,7 @@ var gamePieces = [
     lineWidth = 6,
     currentTile = newTile(),
     currentPlayer = 1,
-    player1 = {"farms": 1, "houses": 2},
+    player1 = {"farms": 8, "houses": 2},
     player2 = {"farms": 8, "houses": 2},
     piecesRemaining = 22;
 
