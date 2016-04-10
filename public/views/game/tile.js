@@ -129,28 +129,28 @@ var gamePieces = [
   }
 
   function spotIsFree(hx, hy) {
-    (typeof Tiles[hx] != "undefined" && typeof Tiles[hx][hy] != "undefined" && Tiles[hx][hy].blank == true)
+    return (typeof Tiles[hx] != "undefined" && typeof Tiles[hx][hy] != "undefined" && Tiles[hx][hy].blank)
   }
 
+  // These are horrifying. Please don't break them.
   function listNeighbors(hx, hy) {
     var neighbors = [];
-
     if((hx - 1) >= 0){  // for left neighbor
        neighbors.push({"pos": "L", "x": (hx - 1), "y": hy});
     }
-    if((hy - 1) >= 0){  // for upper left neighbor
-       neighbors.push({"pos": "UL", "x": hx, "y": (hy - 1)});
+    if((hy - 1) >= 0 && ((hy % 2 != 0) || (hx - 1) >= 0)){  // for upper left neighbor
+       neighbors.push({"pos": "UL", "x": (((hy % 2) != 0) ? hx : (hx - 1)), "y": (hy - 1)});
     }
-    if((hy + 1) <= boardHeight){ // for bottom left neighbor
-       neighbors.push({"pos": "BL", "x": hx, "y": (hy + 1)});
+    if((hy + 1) < boardHeight && ((hy % 2) != 0 || (hx - 1) >= 0)){ // for bottom left neighbor
+       neighbors.push({"pos": "BL", "x": (((hy % 2) != 0) ? hx : (hx - 1)), "y": (hy + 1)});
     }
-    if(((hy - 1) >= 0) && ((hx + 1) <= boardWidth)) { // for upper right neighbor
-       neighbors.push({"pos": "UR", "x": (hx + 1), "y": (hy - 1)});
+    if(((hy - 1) >= 0) && ((hx + 1) < boardWidth) && ((hy % 2) == 0 || (hx + 1) < boardWidth)) { // for upper right neighbor
+       neighbors.push({"pos": "UR", "x": ((hy % 2) == 0 ? hx : (hx + 1)), "y": (hy - 1)});
     }
-    if(((hx + 1) <= boardWidth) && ((hy + 1) <= boardHeight)) {  // for bottom right neighbor
-       neighbors.push({"pos": "BR", "x": (hx + 1), "y": (hy + 1)});
+    if(((hx + 1) < boardWidth) && ((hy + 1) < boardHeight) && ((hy % 2) == 0 || (hx + 1) < boardWidth)) {  // for bottom right neighbor
+       neighbors.push({"pos": "BR", "x": ((hy % 2) == 0 ? hx : (hx + 1)), "y": (hy + 1)});
     }
-    if((hx + 1) <= boardWidth) {  // for the right neighbor
+    if((hx + 1) < boardWidth) {  // for the right neighbor
        neighbors.push({"pos": "R", "x": (hx+1), "y": hy});
     }
 
@@ -158,44 +158,50 @@ var gamePieces = [
   }
 
   function validatePlacement(hx, hy, kites) {
+    var sumLegitNeighbors = 0; // Sum of neighbors who aren't fakers (non-blank)
     if (!spotIsFree(hx, hy)) {
-	return -1;
+	       return -1;
     } else {
 	neighbors = listNeighbors(hx, hy);
 
 	for(var i=0; i < neighbors.length; i++){
 		var n = neighbors[i];
-		switch(n.pos){
-			case "L":
-			   if(!(Tile[n.x][n.y].kites[1] == kites[5])){ return false; }
-			   if(!(Tile[n.x][n.y].kites[2] == kites[4])){ return false; }
-			   break;
-			case "UL":
-			   if(!(Tile[n.x][n.y].kites[2] == kites[0])){ return false; }
-			   if(!(Tile[n.x][n.y].kites[3] == kites[5])){ return false; }
-			   break;
-			case "BL":
-			   if(!(Tile[n.x][n.y].kites[0] == kites[4])){ return false; }
-			   if(!(Tile[n.x][n.y].kites[1] == kites[3])){ return false; }
-			   break;
-			case "UR":
-			   if(!(Tile[n.x][n.y].kites[4] == kites[0])){ return false; }
-			   if(!(Tile[n.x][n.y].kites[3] == kites[1])){ return false; }
-			   break;
-		  	case "BR":
-			   if(!(Tile[n.x][n.y].kites[5] == kites[3])){ return false; }
-			   if(!(Tile[n.x][n.y].kites[0] == kites[2])){ return false; }
-			   break;
-			case "R":
-			   if(!(Tile[n.x][n.y].kites[5] == ktes[1])){ return false; }
-			   if(!(Tile[n.x][n.y].kites[4] == kites[2])){ return false; }
-			   break;
-			default:
-			   console.log("Something wrong with placment validation!");
+        if (Tiles[n.x][n.y].blank == false) {
+            sumLegitNeighbors += 1;
+            //console.log(sumLegitNeighbors = sumLegitNeighbors + 1);
+    		switch(n.pos){
+    			case "L":
+    			   if(!(Tiles[n.x][n.y].kites[1] == kites[5])){ return false; }
+    			   if(!(Tiles[n.x][n.y].kites[2] == kites[4])){ return false; }
+    			   break;
+    			case "UL":
+    			   if(!(Tiles[n.x][n.y].kites[2] == kites[0])){ return false; }
+    			   if(!(Tiles[n.x][n.y].kites[3] == kites[5])){ return false; }
+    			   break;
+    			case "BL":
+    			   if(!(Tiles[n.x][n.y].kites[0] == kites[4])){ return false; }
+    			   if(!(Tiles[n.x][n.y].kites[1] == kites[3])){ return false; }
+    			   break;
+    			case "UR":
+    			   if(!(Tiles[n.x][n.y].kites[4] == kites[0])){ return false; }
+    			   if(!(Tiles[n.x][n.y].kites[3] == kites[1])){ return false; }
+    			   break;
+    		  	case "BR":
+    			   if(!(Tiles[n.x][n.y].kites[5] == kites[3])){ return false; }
+    			   if(!(Tiles[n.x][n.y].kites[0] == kites[2])){ return false; }
+    			   break;
+    			case "R":
+    			   if(!(Tiles[n.x][n.y].kites[5] == kites[1])){ return false; }
+    			   if(!(Tiles[n.x][n.y].kites[4] == kites[2])){ return false; }
+    			   break;
+    			default:
+    			   console.log("Something wrong with placment validation!");
 
 
-		}
+    		}
+        }
 	}
+    return sumLegitNeighbors > 1;
 
 	return true; // true when not found to be false...
     }
@@ -576,7 +582,7 @@ function drawFarm(canvasContext, x, y, player) {
           "CoordX": currentTile.CoordX,
           "CoordY": currentTile.CoordY,
           "hidden": currentTile.hidden,
-          "kites": currentTile.kites,
+          "kites": [currentTile.kites[0], currentTile.kites[1], currentTile.kites[2], currentTile.kites[3], currentTile.kites[4], currentTile.kites[5]],
           "visible": currentTile.visible
       };
       x = eventInfo.offsetX || eventInfo.layerX;
@@ -584,15 +590,20 @@ function drawFarm(canvasContext, x, y, player) {
 
       var selectedTile = getTile(x, y);
 
+      console.log(validatePlacement(selectedTile.x, selectedTile.y, curTile.kites));
 
-      var hexCenter = centerHex(selectedTile.x, selectedTile.y);
-      curTile.CoordX = hexCenter.x;
-      curTile.CoordY = hexCenter.y;
+      if (validatePlacement(selectedTile.x, selectedTile.y, curTile.kites) === true) {
+          var hexCenter = centerHex(selectedTile.x, selectedTile.y);
+          curTile.CoordX = hexCenter.x;
+          curTile.CoordY = hexCenter.y;
 
-      Tiles[selectedTile.x][selectedTile.y] = curTile;
+          Tiles[selectedTile.x][selectedTile.y] = curTile;
 
-      drawBoard(canvas, boardWidth, boardHeight);
-      currentTile = newTile();
+          drawBoard(canvas, boardWidth, boardHeight);
+          currentTile = newTile();
+      } else {
+          //TODO: Visual indication of lack of playability of game piece.
+      }
   });
 
   // Key code 37 is left arrow.
