@@ -264,19 +264,21 @@ var gamePieces = [
 
 function drawFarm(canvasContext, x, y, player) {
     var fill = fill || true;
+    var previousFill = canvasContext.fillStyle;
+    var previousStroke = canvasContext.strokeStyle;
 
     canvasContext.beginPath();
     canvasContext.lineTo(x + hexRadius, y + hexRadius);  //Center
     canvasContext.beginPath();
     canvasContext.arc(x+ hexRadius, y+ hexRadius, hexRectangleWidth*.2, 0, 2 * Math.PI, false);
-    if (player=1){
-    	canvasContext.fillStyle = "black";
-      canvasContext.strokeStyle = "black";
+    if (player==1){
+    	canvasContext.fillStyle = "#ffff66";
+      canvasContext.strokeStyle = "#ffff66";
     }
     else
     {
-    	canvasContext.fillStyle = "grey";
-      canvasContext.strokeStyle = "grey";
+    	canvasContext.fillStyle = "#cc5500";
+      canvasContext.strokeStyle = "#cc5500";
     }
     canvasContext.lineWidth = 5;
     
@@ -286,6 +288,9 @@ function drawFarm(canvasContext, x, y, player) {
     } else {
       canvasContext.stroke();
     }
+    
+    canvasContext.fillStyle = previousFill;
+    canvasContext.strokeStyle = previousStroke;
   }
 
   function drawBoard(canvasContext, width, height) {
@@ -458,7 +463,7 @@ function drawFarm(canvasContext, x, y, player) {
         return "#009900";
         break;
       case "rock":
-        return "#999999";
+        return "#6b6b47";
         break;
       case "water":
         return "#0066ff";
