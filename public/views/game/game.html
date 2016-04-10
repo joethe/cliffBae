@@ -9,12 +9,37 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="views/game/game.controller.js"></script>
     <script type="text/javascript" src="views/navbar/navbar.controller.js"></script>
+
+    <style>
+        div.fixed1 {
+            position: fixed;
+            top: 10%;
+            right: 6%;
+            width: 25%;
+            border: 1px solid #000000;
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body ng-app="mainApp" ng-controller="gameCtl as gameCtl">
 <div ng-include="'views/navbar/navbar.html'"></div>
 
   <canvas id="hexmap" width="660" height="624" style="border:15px solid #ffff66;"></canvas>
+
+  <div id="floating-div" class="fixed1">
+      <h1 id="turn"></h1>
+      <hr>
+      <h4 id="pieces"></h4>
+      <hr>
+      <h4 id="p1-num-items"></h4>
+      <hr>
+      <h4 id="p2-num-items"></h4>
+      <hr>
+      <h4 id="placing"></h4>
+      <hr>
+      <h4 id="farms"></h4>
+  </div>
 
   <script type="text/javascript" src="views/game/tile.js"></script>
 </body>

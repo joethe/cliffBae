@@ -51,14 +51,15 @@ var gamePieces = [
     hexRectangleWidth,
     hexagonAngle = 0.523598776, // 30 degrees in radians
     hexagonAngle2 = 1.0473, //60 degrees in radians
-    sideLength = 36 * 2,
+    sideLength = 36 * 1.75,
     boardWidth = 6,
     boardHeight = 6,
     lineWidth = 6,
     currentTile = newTile(),
     currentPlayer = 1,
-    player1 = {"farms": 10, "houses": 2},
-    player2 = {"farms": 10, "houses": 2};
+    player1 = {"farms": 1, "houses": 2},
+    player2 = {"farms": 8, "houses": 2},
+    piecesRemaining = 22;
 
   hexHeight = Math.sin(hexagonAngle) * sideLength;
   hexRadius = Math.cos(hexagonAngle) * sideLength;
@@ -78,7 +79,7 @@ var gamePieces = [
     var ctx = canvas.getContext('2d');
 
     ctx.fillStyle = "#006600";
-    ctx.strokeStyle = "#ffff00";
+    ctx.strokeStyle = "#ffff66";
     ctx.lineWidth = lineWidth;
 
     drawBoard(ctx, boardWidth, boardHeight);
@@ -111,7 +112,7 @@ var gamePieces = [
           if (hexY >= 0 && hexY < boardHeight) {
             currentTile.CoordX = screenX;
             currentTile.CoordY = screenY;
-            if (Tiles[hexX][hexY].blank == true) {
+            if (Tiles[hexX][hexY].blank == true && piecesRemaining > 0) {
                 drawTile(ctx, screenX, screenY, true, currentTile.kites);
                 drawHexagon(ctx, screenX, screenY, false);
             }
@@ -357,6 +358,27 @@ function drawFarm(canvasContext, x, y, player) {
   function drawBoard(canvasContext, width, height) {
     var i,
       j;
+
+    document.getElementById("turn").innerHTML = "Player " + currentPlayer + "'s turn";
+    document.getElementById("pieces").innerHTML = "There are " + piecesRemaining + " pieces remaining";
+    document.getElementById("p1-num-items").innerHTML = "Player 1 has "
+                                                            + player1.houses + " houses and "
+                                                            + player1.farms + " farms remaining.";
+    document.getElementById("p2-num-items").innerHTML = "Player 2 has "
+                                                            + player2.houses + " houses and "
+                                                            + player2.farms + " farms remaining.";
+
+    document.getElementById("placing").innerHTML = "Place tiles by left clicking on a Hex. <br>"
+                                                    + "Or, press 'H' to place AND build a house. <br>"
+                                                    + "Press 'R' to get a new tile if you can't play.";
+    document.getElementById("farms").innerHTML = "Place farms on spaces adjacent to your own to claim that territory. <br>"
+                                                    + "The player with the most farms at the end wins!";
+
+    if (player1.farms === 0 || player2.farms === 0) {
+        document.getElementById("floating-div").innerHTML = "<h1> Player " + (player1.farms < player2.farms) ? "1 wins! </h1></div>" : "2 wins!</h1></div>"
+    }
+
+
 
     for (i = 0; i < width; ++i) {
       for (j = 0; j < height; ++j) {
@@ -620,7 +642,7 @@ function drawFarm(canvasContext, x, y, player) {
 
       console.log(validatePlacement(selectedTile.x, selectedTile.y, curTile.kites));
 
-      if (validatePlacement(selectedTile.x, selectedTile.y, curTile.kites) === true) {
+      if (validatePlacement(selectedTile.x, selectedTile.y, curTile.kites) === true && piecesRemaining > 0) {
           var hexCenter = centerHex(selectedTile.x, selectedTile.y);
           curTile.CoordX = hexCenter.x;
           curTile.CoordY = hexCenter.y;
@@ -629,6 +651,7 @@ function drawFarm(canvasContext, x, y, player) {
 
           drawBoard(canvas, boardWidth, boardHeight);
           currentTile = newTile();
+          piecesRemaining--;
           return true;
       } else {
           //TODO: Visual indication of lack of playability of game piece.
