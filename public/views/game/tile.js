@@ -56,7 +56,9 @@ var gamePieces = [
     boardHeight = 4,
     lineWidth = 6,
     currentTile = newTile(),
-    currentPlayer = 1;
+    currentPlayer = 1,
+    player1 = {"farms": 20, "houses": 4},
+    player2 = {"farms": 20, "houses": 4};
 
   hexHeight = Math.sin(hexagonAngle) * sideLength;
   hexRadius = Math.cos(hexagonAngle) * sideLength;
@@ -104,17 +106,28 @@ var gamePieces = [
       drawBoard(ctx, boardWidth, boardHeight);
 
       // Check if the mouse's coords are on the board & the field is available to be placed into
-      if (typeof Tiles[hexX] != "undefined" && typeof Tiles[hexX][hexY] != "undefined" && Tiles[hexX][hexY].blank == true) {
+      if (typeof Tiles[hexX] != "undefined" && typeof Tiles[hexX][hexY] != "undefined") {
         if (hexX >= 0 && hexX < boardWidth) {
           if (hexY >= 0 && hexY < boardHeight) {
             currentTile.CoordX = screenX;
             currentTile.CoordY = screenY;
-            drawTile(ctx, screenX, screenY, true, currentTile.kites);
-            drawHexagon(ctx, screenX, screenY, false);
+            if (Tiles[hexX][hexY].blank == true) {
+                drawTile(ctx, screenX, screenY, true, currentTile.kites);
+                drawHexagon(ctx, screenX, screenY, false);
+            }
           }
         }
       }
     });
+  }
+
+  function toggleTurn() {
+      if (currentPlayer === 1) {
+          currentPlayer = 2;
+      } else {
+          currentPlayer = 1;
+      }
+      return currentPlayer;
   }
 
   function newTile() {
@@ -347,6 +360,9 @@ function drawFarm(canvasContext, x, y, player) {
         }
         if (Tiles[i][j].visible == true) {
           drawHexagon(ctx, Tiles[i][j].CoordX, Tiles[i][j].CoordY, false);
+        }
+        if (Tiles[i][j].house != 0) {
+            drawHouse(ctx, Tiles[i][j].CoordX, Tiles[i][j].CoordY, Tiles[i][j].house);
         }
         if (Tiles[i][j].farm != 0) {
             drawFarm(ctx, Tiles[i][j].CoordX, Tiles[i][j].CoordY, Tiles[i][j].farm);
@@ -616,11 +632,18 @@ function drawFarm(canvasContext, x, y, player) {
 
   }
 
+  function canPlayFarm(x, y) {
+      return (Tiles[x][y].kites.length === 6 && Tiles[x][y].farm === 0 && Tiles[x][y].house === 0);
+  }
+
 
   document.addEventListener("click", function(eventInfo){
       x = eventInfo.offsetX || eventInfo.layerX;
       y = eventInfo.offsetY || eventInfo.layerY;
-      placeTile(x, y)
+      if (placeTile(x, y)) {
+          toggleTurn();
+      }
+
   });
 
   // Key code 37 is left arrow.
@@ -630,6 +653,7 @@ function drawFarm(canvasContext, x, y, player) {
     key = event.keyCode;
     var currX = currentTile.CoordX;
     var currY = currentTile.CoordY;
+    var nice = getTile(currX, currY);
 
     switch (key) {
         case 37: // Left Arrow
@@ -639,8 +663,17 @@ function drawFarm(canvasContext, x, y, player) {
             rotateTile("R");
             break;
         case 70: // F
+            if (canPlayFarm(nice.x, nice.y)) {
+                Tiles[nice.x][nice.y].farm = currentPlayer;
+                toggleTurn();
+            }
+            break;
+        case 72: // H
             var placed = placeTile(currX, currY);
-            if (placed) {Tiles[getTile(currX, currY).x][getTile(currX, currY).y].farm = currentPlayer;}
+            if (placed) {
+                Tiles[nice.x][nice.y].house = currentPlayer;
+                toggleTurn();
+            }
             break;
         case 82: // R
             //TODO: Send current to player's "hand"
