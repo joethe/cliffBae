@@ -55,15 +55,7 @@
     boardWidth = 4,
     boardHeight = 4,
     lineWidth = 6,
-    currentTile = {
-      "blank": false,
-      "CoordX": null,
-      "CoordY": null,
-      "hidden": false,
-      "kites": ["rock", "rock", "rock", "grass", "grass", "grass"],
-      "visible": true
-  };
-
+    currentTile = newTile();
 
   hexHeight = Math.sin(hexagonAngle) * sideLength;
   hexRadius = Math.cos(hexagonAngle) * sideLength;
@@ -114,7 +106,7 @@
       if (typeof Tiles[hexX] != "undefined" && typeof Tiles[hexX][hexY] != "undefined" && Tiles[hexX][hexY].blank == true) {
         if (hexX >= 0 && hexX < boardWidth) {
           if (hexY >= 0 && hexY < boardHeight) {
-            drawTile(ctx, screenX, screenY, true, ["rock", "rock", "rock", "grass", "grass", "grass"]);
+            drawTile(ctx, screenX, screenY, true, currentTile.kites);
             drawHexagon(ctx, screenX, screenY, false);
           }
         }
@@ -122,15 +114,27 @@
     });
   }
 
+  function newTile() {
+      tile = {
+          "blank": false,
+          "CoordX": null,
+          "CoordY": null,
+          "hidden": false,
+          "kites": MakeRandomKiteValues(),
+          "visible": true
+      }
+      return tile;
+  }
+
   function spotIsFree(hx, hy) {
     (typeof Tiles[hx] != "undefined" && typeof Tiles[hx][hy] != "undefined" && Tiles[hx][hy].blank == true)
   }
 
   function listNeighbors(hx, hy) {
-    var neighbors = [];    
-    
+    var neighbors = [];
+
     if((hx - 1) >= 0){  // for left neighbor
-       neighbors.push({"pos": "L", "x": (hx - 1), "y": hy});	
+       neighbors.push({"pos": "L", "x": (hx - 1), "y": hy});
     }
     if((hy - 1) >= 0){  // for upper left neighbor
        neighbors.push({"pos": "UL", "x": hx, "y": (hy - 1)});
@@ -156,7 +160,7 @@
 	return -1;
     } else {
 	neighbors = listNeighbors(hx, hy);
-	
+
 	for(var i=0; i < neighbors.length; i++){
 		var n = neighbors[i];
 		switch(n.pos){
@@ -186,13 +190,13 @@
 			   break;
 			default:
 			   console.log("Something wrong with placment validation!");
-		 
-			  
+
+
 		}
 	}
 
 	return true; // true when not found to be false...
-    }	
+    }
   }
 
   function initTiles(width, height) {
@@ -259,8 +263,6 @@
   function drawBoard(canvasContext, width, height) {
     var i,
       j;
-
-      console.log(Tiles);
 
     for (i = 0; i < width; ++i) {
       for (j = 0; j < height; ++j) {
@@ -439,12 +441,17 @@
   }
 
   function R3(){
-    var n = Math.floor(Math.Random()*3);
-    if(n==0){return "grass";}else if(n==1){return "rock";}else{return "water";}
+    var n = Math.floor(Math.random()*3);
+    if (n==0) {
+        return "grass";
+    } else if (n==1) {
+        return "rock";
+    } else {
+        return "water";}
   }
 
   function MakeRandomKiteValues(){
-    return [self.R3(),self.R3(),self.R3(),self.R3(),self.R3(),self.R3()];
+    return [R3(),R3(),R3(),R3(),R3(),R3()];
   }
 
   function MakeRandomKites(n){
@@ -456,9 +463,9 @@
   }
 
   function selectRandom(arr){
-    var r = Math.floor(Math.Random()*arr.length);
+    var r = Math.floor(Math.random()*arr.length);
     temparr;
-    temp=arr[i];
+    temp=arr[r];
     for(var i = 0;i<arr.length;i++){
       if(i!=r){temparr.push(arr[i]);}
     }
@@ -481,18 +488,17 @@
 
   document.addEventListener("click", function(eventInfo){
       var curTile = {
-          "blank": false,
-          "CoordX": null,
-          "CoordY": null,
-          "hidden": false,
-          "kites": ["rock", "rock", "rock", "grass", "grass", "grass"],
-          "visible": true
+          "blank": currentTile.blank,
+          "CoordX": currentTile.CoordX,
+          "CoordY": currentTile.CoordY,
+          "hidden": currentTile.hidden,
+          "kites": currentTile.kites,
+          "visible": currentTile.visible
       };
       x = eventInfo.offsetX || eventInfo.layerX;
       y = eventInfo.offsetY || eventInfo.layerY;
 
       var selectedTile = getTile(x, y);
-      console.log(selectedTile);
 
 
       var hexCenter = centerHex(selectedTile.x, selectedTile.y);
@@ -500,10 +506,9 @@
       curTile.CoordY = hexCenter.y;
 
       Tiles[selectedTile.x][selectedTile.y] = curTile;
-      console.log(Tiles);
-      console.log(currentTile);
 
       drawBoard(canvas, boardWidth, boardHeight);
+      currentTile = newTile();
   });
 
 })();
