@@ -374,7 +374,7 @@
   function MakeRandomKites(n){
     var arr;
     for(var i = 0;i<n;i++){
-      arr.push(MakeRandomKiteValues();)
+      arr.push(MakeRandomKiteValues());
     }
     return arr;
   }
