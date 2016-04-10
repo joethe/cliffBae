@@ -188,6 +188,9 @@ window.onload = function() {
 }*/
 var revertX=function(x,y){return x + ((8/3)*y);}
 var revertY=function(y){return (4/3)*y;}
+var findNear=function(x,y){
+  tiles.forEach(function)
+}
 
 
 function drawBoard() {
@@ -197,7 +200,7 @@ function drawBoard() {
         var y=tiles[i].y;
         context.drawImage(
             tiles[i].placed ? realTile : emptyTile,
-            x-(y/2),
+            x+(y/2),
             (3*y)/4,
             xS,
             yS

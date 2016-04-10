@@ -31,6 +31,10 @@ app.use(express.static('bower_components'));
 // app.get('/kittens', function(req, res){ etc... }) -- defining a function to handle the request for '/kittens' (req = request, res = response)
 // app.get('/kittens', function(req, res){ res.send('kittens!"); }); -- responding to the request by sending the string "kittens!" to the browser.
 
+app.get('/howTo', function(req, res){
+    res.sendFile('public/views/howto/howto.html', options);
+});
+
 app.get('/quotes', function(req, res){
     res.sendFile('public/views/quotes/quotes.html', options);
 });
@@ -57,7 +61,7 @@ app.get('/art', function(req, res){
 
 app.get('/tiles', function(req, res){
     res.sendFile('public/views/tiles/tiles.html', options);
-});	
+});
 
 app.get('/', function(req, res){
     res.sendFile('public/views/main/index.html', options);
