@@ -157,18 +157,18 @@
 
   function drawLittleHexagon(canvasContext, x, y, fill) {
     var fill = fill || false;
-    
-    
+
+
     sideLengthL=sideLength*.4;
     x=x+sideLengthL;
     y=y+sideLengthL;
-    
-    
+
+
     hexHeightL=Math.sin(hexagonAngle) * sideLengthL;
     hexRadiusL=Math.cos(hexagonAngle) * sideLengthL;
   	hexRectangleHeightL = sideLengthL + 2 * hexHeightL;
   	hexRectangleWidthL = 2 * hexRadiusL;
-    
+
 
     canvasContext.beginPath();
     canvasContext.moveTo(x + hexRadiusL, y); //Top
@@ -185,7 +185,7 @@
       canvasContext.stroke();
     }
   }
-  
+
     function drawHexagon(canvasContext, x, y, fill) {
     var fill = fill || false;
 
@@ -290,7 +290,7 @@
     } else {
       canvasContext.stroke();
     }
-    
+
     for (var i = 0; i < ground.length; i++) {
     	if (ground[i] == "grass")
       {
@@ -299,7 +299,7 @@
          break;
       }
     }
-   
+
   }
 
 
@@ -317,6 +317,19 @@
       default:
         return "#000000";
     }
+  }
+
+  function MakeRandomKiteValues(){
+    r = Math.Random()*729;
+    return [r%3,(r=r/3)%3,(r=r/3)%3,(r=r/3)%3,(r=r/3)%3,(r=r/3)%3].forEach(function(x){if(x==0){"grass"}else if{"rock"}else{"water"}});
+  }
+
+  function MakeRandomKites(){
+    var arr;
+    for(var i = 0;i<40;i++){
+      arr.push(MakeRandomKiteValues())
+    }
+    return arr;
   }
 
 })();
