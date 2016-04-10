@@ -262,6 +262,32 @@ var gamePieces = [
     return arr;
   }
 
+function drawFarm(canvasContext, x, y, player) {
+    var fill = fill || true;
+
+    canvasContext.beginPath();
+    canvasContext.lineTo(x + hexRadius, y + hexRadius);  //Center
+    canvasContext.beginPath();
+    canvasContext.arc(x+ hexRadius, y+ hexRadius, hexRectangleWidth*.2, 0, 2 * Math.PI, false);
+    if (player=1){
+    	canvasContext.fillStyle = "black";
+      canvasContext.strokeStyle = "black";
+    }
+    else
+    {
+    	canvasContext.fillStyle = "grey";
+      canvasContext.strokeStyle = "grey";
+    }
+    canvasContext.lineWidth = 5;
+    
+
+    if (fill) {
+      canvasContext.fill();
+    } else {
+      canvasContext.stroke();
+    }
+  }
+
   function drawBoard(canvasContext, width, height) {
     var i,
       j;
