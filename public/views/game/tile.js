@@ -51,7 +51,7 @@ var gamePieces = [
     hexRectangleWidth,
     hexagonAngle = 0.523598776, // 30 degrees in radians
     hexagonAngle2 = 1.0473, //60 degrees in radians
-    sideLength = 36 * 1.5,
+    sideLength = 36 * 2,
     boardWidth = 6,
     boardHeight = 6,
     lineWidth = 6,
@@ -124,9 +124,14 @@ var gamePieces = [
   function toggleTurn() {
       if (currentPlayer === 1) {
           currentPlayer = 2;
+          canvas.setAttribute("style", "border:15px solid #cc5500;");
+          ctx.strokeStyle = "#cc5500";
       } else {
           currentPlayer = 1;
+          canvas.setAttribute("style", "border:15px solid #ffff66;");
+          ctx.strokeStyle = "#ffff66";
       }
+      drawBoard(canvas.getContext('2d'), boardWidth, boardHeight);
       return currentPlayer;
   }
 
