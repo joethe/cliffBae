@@ -1,48 +1,48 @@
 (function() {
   var canvas = document.getElementById('hexmap');
 
-  /*
-["grass","grass","grass","grass","grass","grass"],
-["grass","grass","grass","grass","grass","grass"],
-["grass","grass","grass","grass","grass","grass"],
-["grass","grass","grass","grass","grass","rock"],
-["grass","grass","grass","grass","grass","water"],
-["grass","grass","grass","grass","rock","rock"],
-["grass","grass","grass","rock","grass","grass"],
-["grass","grass","grass","rock","grass","rock"],
-["grass","grass","grass","rock","rock","rock"],
-["grass","grass","grass","water","water","water"],
-["grass","grass","grass","water","water","water"],
-["grass","grass","rock","grass","grass","grass"],
-["grass","grass","rock","rock","grass","grass"],
-["grass","grass","water","grass","grass","rock"],
-["grass","grass","water","grass","rock","rock"],
-["grass","rock","grass","water","water","water"],
-["grass","rock","grass","water","water","water"],
-["grass","rock","rock","grass","grass","grass"],
-["grass","rock","rock","grass","rock","grass"],
-["grass","rock","rock","rock","rock","grass"],
-["grass","water","grass","rock","rock","grass"],
-["grass","water","water","grass","grass","grass"],
-["grass","water","water","water","grass","grass"],
-["grass","water","water","water","water","grass"],
-["rock","grass","grass","grass","grass","rock"],
-["rock","grass","grass","grass","rock","rock"],
-["rock","grass","rock","rock","rock","rock"],
-["rock","rock","grass","grass","grass","grass"],
-["rock","rock","grass","rock","rock","grass"],
-["rock","rock","grass","water","water","grass"],
-["rock","rock","rock","grass","grass","grass"],
-["rock","rock","rock","rock","grass","grass"],
-["rock","rock","rock","rock","rock","rock"],
-["water","grass","water","water","water","water"],
-["water","water","grass","grass","grass","water"],
-["water","water","grass","grass","rock","grass"],
-["water","water","water","grass","grass","grass"],
-["water","water","water","grass","grass","water"],
-["water","water","water","water","grass","grass"],
-["water","water","water","water","grass","grass"]
-*/
+var gamePieces = [
+    ["grass","grass","grass","grass","grass","grass"],
+    ["grass","grass","grass","grass","grass","grass"],
+    ["grass","grass","grass","grass","grass","grass"],
+    ["grass","grass","grass","grass","grass","rock"],
+    ["grass","grass","grass","grass","grass","water"],
+    ["grass","grass","grass","grass","rock","rock"],
+    ["grass","grass","grass","rock","grass","grass"],
+    ["grass","grass","grass","rock","grass","rock"],
+    ["grass","grass","grass","rock","rock","rock"],
+    ["grass","grass","grass","water","water","water"],
+    ["grass","grass","grass","water","water","water"],
+    ["grass","grass","rock","grass","grass","grass"],
+    ["grass","grass","rock","rock","grass","grass"],
+    ["grass","grass","water","grass","grass","rock"],
+    ["grass","grass","water","grass","rock","rock"],
+    ["grass","rock","grass","water","water","water"],
+    ["grass","rock","grass","water","water","water"],
+    ["grass","rock","rock","grass","grass","grass"],
+    ["grass","rock","rock","grass","rock","grass"],
+    ["grass","rock","rock","rock","rock","grass"],
+    ["grass","water","grass","rock","rock","grass"],
+    ["grass","water","water","grass","grass","grass"],
+    ["grass","water","water","water","grass","grass"],
+    ["grass","water","water","water","water","grass"],
+    ["rock","grass","grass","grass","grass","rock"],
+    ["rock","grass","grass","grass","rock","rock"],
+    ["rock","grass","rock","rock","rock","rock"],
+    ["rock","rock","grass","grass","grass","grass"],
+    ["rock","rock","grass","rock","rock","grass"],
+    ["rock","rock","grass","water","water","grass"],
+    ["rock","rock","rock","grass","grass","grass"],
+    ["rock","rock","rock","rock","grass","grass"],
+    ["rock","rock","rock","rock","rock","rock"],
+    ["water","grass","water","water","water","water"],
+    ["water","water","grass","grass","grass","water"],
+    ["water","water","grass","grass","rock","grass"],
+    ["water","water","water","grass","grass","grass"],
+    ["water","water","water","grass","grass","water"],
+    ["water","water","water","water","grass","grass"],
+    ["water","water","water","water","grass","grass"]
+];
 
   var Tiles = Create2DArray(100),
     hexHeight,
@@ -451,7 +451,7 @@
   }
 
   function MakeRandomKiteValues(){
-    return [R3(),R3(),R3(),R3(),R3(),R3()];
+    return gamePieces[Math.floor(Math.random() * gamePieces.length)];
   }
 
   function MakeRandomKites(n){
