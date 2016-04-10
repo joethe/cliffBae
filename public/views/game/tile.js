@@ -106,6 +106,8 @@ var gamePieces = [
       if (typeof Tiles[hexX] != "undefined" && typeof Tiles[hexX][hexY] != "undefined" && Tiles[hexX][hexY].blank == true) {
         if (hexX >= 0 && hexX < boardWidth) {
           if (hexY >= 0 && hexY < boardHeight) {
+            currentTile.CoordX = screenX;
+            currentTile.CoordY = screenY;
             drawTile(ctx, screenX, screenY, true, currentTile.kites);
             drawHexagon(ctx, screenX, screenY, false);
           }
@@ -533,13 +535,15 @@ var gamePieces = [
   // Key code 37 is left arrow.
   // Key code 39 is right arrow.
   document.onkeydown = function(event) {
+    ctx = canvas.getContext('2d');
     key = event.keyCode;
     if (key === 37) { // Left arrow -> Rotate Counter-Clockwise
         rotateTile("L");
     } else if (key === 39) { // Right arrow -> Rotate Clockwise
         rotateTile("R");
     }
-    drawBoard(canvas, boardWidth, boardHeight);
+    drawTile(ctx, currentTile.CoordX, currentTile.CoordY, true, currentTile.kites);
+    drawHexagon(ctx, currentTile.CoordX, currentTile.CoordY, false);
   };
 
 })();
