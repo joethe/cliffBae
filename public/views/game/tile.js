@@ -202,7 +202,7 @@
     var fill = fill || false;
 
 
-    sideLengthL=sideLength*.4;
+    sideLengthL=sideLength*.46;
     x=x+sideLengthL;
     y=y+sideLengthL;
 
