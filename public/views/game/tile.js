@@ -51,14 +51,14 @@ var gamePieces = [
     hexRectangleWidth,
     hexagonAngle = 0.523598776, // 30 degrees in radians
     hexagonAngle2 = 1.0473, //60 degrees in radians
-    sideLength = 36 * 2,
-    boardWidth = 4,
-    boardHeight = 4,
+    sideLength = 36 * 1.5,
+    boardWidth = 6,
+    boardHeight = 6,
     lineWidth = 6,
     currentTile = newTile(),
     currentPlayer = 1,
-    player1 = {"farms": 20, "houses": 4},
-    player2 = {"farms": 20, "houses": 4};
+    player1 = {"farms": 10, "houses": 2},
+    player2 = {"farms": 10, "houses": 2};
 
   hexHeight = Math.sin(hexagonAngle) * sideLength;
   hexRadius = Math.cos(hexagonAngle) * sideLength;
@@ -69,7 +69,7 @@ var gamePieces = [
   hexRectangleWidth = 2 * hexRadius;
 
   canvas.width = Math.max(660, (boardWidth * hexRectangleWidth) + 50)
-  canvas.width = Math.max(624, (boardWidth * hexRectangleHeight) + 50)
+  canvas.height = Math.max(624, (boardWidth * hexRectangleHeight) + 50)
 
   Tiles = initTiles(boardWidth, boardHeight);
 
@@ -633,7 +633,8 @@ function drawFarm(canvasContext, x, y, player) {
   }
 
   function canPlayFarm(x, y) {
-      return (Tiles[x][y].kites.length === 6 && Tiles[x][y].farm === 0 && Tiles[x][y].house === 0);
+      if (currentPlayer === 1) {player = player1;} else {player = player2};
+      return (Tiles[x][y].kites.length === 6 && Tiles[x][y].farm === 0 && Tiles[x][y].house === 0 && player.farms !== 0);
   }
 
 
@@ -665,13 +666,24 @@ function drawFarm(canvasContext, x, y, player) {
         case 70: // F
             if (canPlayFarm(nice.x, nice.y)) {
                 Tiles[nice.x][nice.y].farm = currentPlayer;
+                if (currentPlayer === 1) {
+                    player1.farms = player1.farms - 1;
+                } else {
+                    player2.farms = player2.farms - 1;
+                }
                 toggleTurn();
             }
             break;
         case 72: // H
-            var placed = placeTile(currX, currY);
-            if (placed) {
+            var player;
+            if (currentPlayer === 1) {player = player1;} else {player = player2};
+            if (player.houses !== 0 && placeTile(currX, currY)) {
                 Tiles[nice.x][nice.y].house = currentPlayer;
+                if (currentPlayer === 1) {
+                    player1.houses = player1.houses - 1;
+                } else {
+                    player2.houses = player2.houses - 1;
+                }
                 toggleTurn();
             }
             break;
