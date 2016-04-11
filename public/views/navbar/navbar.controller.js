@@ -5,12 +5,10 @@ angular.module('mainApp').controller('navbarCtrl', function(){
 
     navbar.pages = [
         {text: "Home", link: '/'},
-        {text: "How To", link: '/howTo'},
         {text: "About", link: '/about'},
         {text: "Art Assets", link: '/art'},
         {text: "Quotes", link: '/quotes'},
-        {text: "Snap", link: '/snap'},
-        {text: "Tiles", link: '/tiles'},
+        {text: "How To Play", link: '/howTo'},
         {text: "Game", link: '/game'}
     ];
 });
