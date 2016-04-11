@@ -47,10 +47,6 @@ app.get('/snap', function(req, res){
     res.sendFile('public/views/snap/snap.html', options);
 });
 
-app.get('/testgames', function(req, res){
-    res.sendFile('public/views/testgames/testgames.html', options);
-});
-
 app.get('/game', function(req, res){
     res.sendFile('public/views/game/game.html', options);
 });

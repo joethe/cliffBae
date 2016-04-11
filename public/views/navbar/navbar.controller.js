@@ -7,11 +7,10 @@ angular.module('mainApp').controller('navbarCtrl', function(){
         {text: "Home", link: '/'},
         {text: "How To", link: '/howTo'},
         {text: "About", link: '/about'},
-        {text: "Test Games", link: '/testgames'},
         {text: "Art Assets", link: '/art'},
         {text: "Quotes", link: '/quotes'},
         {text: "Snap", link: '/snap'},
-	{text: "Tiles", link: '/tiles'},
-	{text: "Game", link: '/game'}
+        {text: "Tiles", link: '/tiles'},
+        {text: "Game", link: '/game'}
     ];
 });
