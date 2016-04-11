@@ -17,20 +17,22 @@
 
 <div class="container">
 	<div class="jumbotron">
-		<h1>This page is for displaying art assets for the game."</h1>
+		<h1>This page is for displaying art assets for the game.</h1>
+    <h3>
+      Most of what's here, at least for now, is rough aproximations of the actual gamepieces for Fjords. We claim no ownership
+      over their design. As it sits currently, they are not used in our version of the game; which generates its own tiles. Eventually,
+      the game should be able to easily switch between using custom hand-drawn tiles and procedurally generated ones.
+    </h3>
 	</div>
 
-	<div class="row images">
-    	<div class="col-md-6">
-    		<div class="list-group">
-    			<div class="list-item" ng-repeat="image in artCtl.colOneImages"> <img src="{{artCtl.imagesPath}}{{image}}" class="img-thumbnail"/> </div>
-    		</div>
-    	</div>
-    	<div class="col-md-6">
-    		<div class="list-group">
-    			<div class="list-item" ng-repeat="image in artCtl.colTwoImages"> <img src="{{artCtl.imagesPath}}{{image}}" class="img-thumbnail"/> </div>
-    		</div>
-    	</div>
+<div ng-repeat="n in artCtl.emptyCol(artCtl.images.length) track by $index" ng-switch="$index%6">
+	<div class="row images" ng-switch-when="0">
+    	<div class="col-sm-2"><img src="{{artCtl.imagesPath}}{{artCtl.images[$index]}}" class="image-thumbnail"></div>
+      <div class="col-sm-2"><img src="{{artCtl.imagesPath}}{{artCtl.images[$index + 1]}}" class="image-thumbnail"></div>
+      <div class="col-sm-2"><img src="{{artCtl.imagesPath}}{{artCtl.images[$index + 2]}}" class="image-thumbnail"></div>
+      <div class="col-sm-2"><img src="{{artCtl.imagesPath}}{{artCtl.images[$index + 3]}}" class="image-thumbnail"></div>
+      <div class="col-sm-2"><img src="{{artCtl.imagesPath}}{{artCtl.images[$index + 4]}}" class="image-thumbnail"></div>
+      <div class="col-sm-2"><img src="{{artCtl.imagesPath}}{{artCtl.images[$index + 5]}}" class="image-thumbnail"></div>
 	</div>
 </div>
 

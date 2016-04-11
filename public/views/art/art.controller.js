@@ -5,26 +5,19 @@ angular.module('mainApp').controller('artCtl', function(){
 
 	this.imagesPath = "assets/images/"
 
-	this.colOneImages = [
-        "GGGGGG_2.png",
-        "GGGGGG_3.png",
-        "GGGGGG.png",
-        "GGGGGR.png",
-        "GGGGGW.png",
-        "GGGGRR.png",
-        "GGGRGG.png",
-        "GGGRGR.png",
-        "GGGRRR.png",
-        "GGGWWW_2.png",
-        "GGGWWW.png",
-        "GGRGGG.png",
-        "GGRRGG.png",
-        "GGWGGR.png",
-        "GGWGRR.png",
-        "GRGWWW_2.png"
-        ];
+	this.emptyCol = function(n){
+		return new Array(n);
+	}
 
-    this.colTwoImages = [
+	this.images = [
+        "GGGGGG_2.png", "GGGGGG_3.png",
+        "GGGGGG.png", "GGGGGR.png",
+        "GGGGGW.png", "GGGGRR.png",
+        "GGGRGG.png", "GGGRGR.png",
+        "GGGRRR.png", "GGGWWW_2.png",
+				"GGGWWW.png", "GGRGGG.png",
+        "GGRRGG.png", "GGWGGR.png",
+        "GGWGRR.png", "GRGWWW_2.png",
         "GRGWWW.png",
         "GRRGGG.png",
         "GRRGRG.png",
@@ -50,5 +43,5 @@ angular.module('mainApp').controller('artCtl', function(){
         "WWWGGW.png",
         "WWWWGG_2.png",
         "WWWWGG.png"
-	];	
+	];
 });
